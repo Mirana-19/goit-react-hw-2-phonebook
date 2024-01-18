@@ -1,20 +1,23 @@
+import { Button, Title } from 'styles/Shared.styles';
+import { Book, Contact, Item } from './ContactList.styled';
+
 export const ContactList = ({ contacts, deleteContact }) => {
   return (
     <>
-      <h2>Contacts</h2>
-      <ul>
+      <Title>Contacts</Title>
+      <Book>
         {contacts.map(contact => (
-          <li key={contact.id}>
-            <p>
+          <Item key={contact.id}>
+            <Contact>
               <span>{contact.name}:</span>
               <span>{contact.number}</span>
-            </p>
-            <button onClick={() => deleteContact(contact.id)} type="button">
+            </Contact>
+            <Button onClick={() => deleteContact(contact.id)} type="button">
               Delete
-            </button>
-          </li>
+            </Button>
+          </Item>
         ))}
-      </ul>
+      </Book>
     </>
   );
 };

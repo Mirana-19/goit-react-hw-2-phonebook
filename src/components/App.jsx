@@ -10,18 +10,16 @@ export class App extends Component {
       { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
+
     filter: '',
-    name: '',
-    number: '',
   };
 
-  onInputChange = e => {
+  onFilterChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  addContact = e => {
-    e.preventDefault();
-    const { name, contacts } = this.state;
+  addContact = ({ name, number }) => {
+    const { contacts } = this.state;
 
     if (
       contacts.find(
@@ -33,17 +31,16 @@ export class App extends Component {
 
     this.setState(prevState => ({
       contacts: [
-        { id: nanoid(), name: prevState.name, number: prevState.number },
+        { id: nanoid(), name: name, number: number },
         ...prevState.contacts,
       ],
     }));
-
-    this.setState({ name: '', number: '' });
   };
 
   deleteContact = id => {
-    const { contacts } = this.state;
-    this.setState({ contacts: contacts.filter(contact => contact.id !== id) });
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contact => contact.id !== id),
+    }));
   };
 
   filterContacts = () => {
@@ -55,16 +52,11 @@ export class App extends Component {
   };
 
   render() {
-    const { name, number, filter } = this.state;
+    const { filter } = this.state;
     return (
       <>
-        <ContactForm
-          name={name}
-          number={number}
-          onInputChange={this.onInputChange}
-          addContact={this.addContact}
-        />
-        <Filter filter={filter} onInputChange={this.onInputChange} />
+        <ContactForm addContact={this.addContact} />
+        <Filter filter={filter} onFilterChange={this.onFilterChange} />
         <ContactList
           contacts={this.filterContacts(filter)}
           deleteContact={this.deleteContact}

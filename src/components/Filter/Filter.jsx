@@ -1,13 +1,13 @@
 import React from 'react';
 import { Label } from './Filter.styled';
 
-export const Filter = ({ onInputChange, filter }) => {
+export const Filter = ({ onFilterChange, filter }) => {
   return (
     <Label>
       Find contacts by name
       <input
         value={filter}
-        onChange={e => onInputChange(e)}
+        onChange={e => onFilterChange(e)}
         type="text"
         name="filter"
       />

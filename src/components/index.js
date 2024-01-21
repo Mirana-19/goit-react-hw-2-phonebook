@@ -1,3 +1,3 @@
-export * from './Phonebook/ContactForm';
-export * from './Phonebook/ContactList';
-export * from './Phonebook/Filter';
+export * from './ContactForm/ContactForm';
+export * from './ContactList/ContactList';
+export * from './Filter/Filter';
